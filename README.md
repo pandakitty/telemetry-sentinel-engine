@@ -2,6 +2,13 @@
 
 An automated, high-frequency telemetry ingestion and anomaly detection pipeline designed to simulate spacecraft and ground station sensor feeds, parse data frames, and flag operational anomalies in real time. Built with an interactive Streamlit mission control dashboard for rapid data auditing and systems observability.
 
+## 🚀 Production Architecture
+- **Event Streaming:** Apache Kafka handles decoupled message ingestion across multi-satellite streams.
+- **Micro-Batch Processing:** Real-time Pandas consumer parsing rolling Z-scores and operational fault boundaries.
+- **Persistence Sink:** PostgreSQL relational storage with indexed timestamp queries for low-latency retrieval.
+- **Containerization:** Multi-container Docker Compose setup for local development and CI/CD parity.
+- **Observability:** Live Streamlit Mission Control dashboard querying the database sink.
+
 ## 🚀 Live System Architecture
 * **Telemetry Simulator (`telemetry_simulator.py`):** Multi-threaded packet generation engine simulating live spacecraft sensor streams (bus voltage, internal temperature, signal-to-noise ratio, and packet loss) with controlled stochastic anomaly injection.
 * **Parsing & Z-Score Pipeline (`parser_pipeline.py`):** Structured Pandas transformation layer applying rolling-window Z-score statistical analysis to isolate operational faults independently of hardcoded static bounds.
